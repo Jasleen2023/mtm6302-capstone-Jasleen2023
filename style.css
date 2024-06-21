@@ -1,21 +1,64 @@
+
 body {
-    background-color: #f771d5;
+    font-family: Arial, sans-serif;
+    background-color: #eebbdd;
+    margin: 0;
+    padding: 0;
 }
 
-.pokemon-card {
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 50px;
+    background-color: #68aaf5;
+    box-shadow: 0 0 10px rgba(236, 207, 207, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#quiz-container {
+    text-align: center;
+}
+
+#quiz-form {
+    margin-bottom: 40px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+#question {
+    margin-bottom: 40px;
+}
+
+#answers {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+}
+
+button[type="submit"],
+button {
+    padding: 10px 20px;
+    background-color: #0e0d0d;
+    color: #f9fbfc;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    transition: transform 0.2s;
 }
 
-.pokemon-card:hover {
-    transform: scale(1.05);
+button[type="submit"]:hover,
+button:hover {
+    background-color: #3a90ec;
 }
 
-.pokemon-img {
-    width: 100%;
-    height: auto;
-}
-
-.caught {
-    border: 2px solid rgb(248, 171, 108);
+#result-message {
+    font-weight: bold;
+    margin-bottom: 10px;
 }

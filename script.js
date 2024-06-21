@@ -1,130 +1,146 @@
-const pokemonList = document.getElementById('pokemon-list');
-const caughtPokemonList = document.getElementById('caught-pokemon-list');
-const loadMoreButton = document.getElementById('load-more');
-let offset = 0;
-const limit = 20;
-
 document.addEventListener('DOMContentLoaded', () => {
-    loadPokemon();
-    loadCaughtPokemon();
-});
+    const difficultySelect = document.getElementById('difficulty');
+    const quizForm = document.getElementById('quiz-form');
+    const questionContainer = document.getElementById('question-container');
+    const questionElement = document.getElementById('question');
+    const answersElement = document.getElementById('answers');
+    const resultContainer = document.getElementById('result');
+    const resultMessage = document.getElementById('result-message');
+    const nextQuestionButton = document.getElementById('next-question');
+    const resetScoreButton = document.getElementById('reset-score');
 
-loadMoreButton.addEventListener('click', () => {
-    loadPokemon();
-});
+    let quizData = [];
+    let currentQuestionIndex = 0;
+    let correctAnswers = 0;
+    let incorrectAnswers = 0;
 
-async function loadPokemon() {
-    const response = await fetch (`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
-    const data = await response.json();
-    data.results.forEach(pokemon => {
-        displayPokemon(pokemon);
+    // Event listener for quiz form submission
+    quizForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const difficulty = difficultySelect.value;
+        quizData = await fetchQuizQuestions(difficulty);
+        startQuiz();
     });
-    offset += limit;
-}
 
-function displayPokemon(pokemon) {
-    const pokemonCard = document.createElement('div');
-    pokemonCard.classList.add('col-md-3', 'pokemon-card');
-    pokemonCard.innerHTML = `
-        <div class="card mb-4">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${extractIdFromUrl(pokemon.url)}.png" class="card-img-top pokemon-img" alt="${pokemon.name}">
-            <div class="card-body">
-                <h5 class="card-title text-center">${capitalizeFirstLetter(pokemon.name)}</h5>
-            </div>
-        </div>
-    `;
-    pokemonCard.addEventListener('click', () => {
-        loadPokemonDetails(pokemon.url);
-    });
-    pokemonList.appendChild(pokemonCard);
-}
-
-function extractIdFromUrl(url) {
-    const parts = url.split('/');
-    return parts[parts.length - 2];
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase + string.slice(1);
-}
-
-async function loadPokemonDetails(url) {
-    const response = await fetch(url);
-    const pokemon = await response.json();
-    const pokemonDetails = `
-        <div class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">${capitalizeFirstLetter(pokemon.name)}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <img src="${pokemon.sprites.front_default}" class="img-fluid mb-3">
-                        <p><strong>Height:</strong> ${pokemon.height}</p>
-                        <p><strong>Weight:</strong> ${pokemon.weight}</p>
-                        <p><strong>Base Experience:</strong> ${pokemon.base_experience}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="catch-pokemon">Catch</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', pokemonDetails);
-    document.querySelector('.modal').addEventListener('hidden.bs.modal', () => {
-        document.querySelector('.modal').remove();
-    });
-    document.getElementById('catch-pokemon').addEventListener('click', () => {
-        catchPokemon(pokemon);
-        document.querySelector('.modal').remove();
-    });
-    $('.modal').modal('show');
-}
-
-function catchPokemon(pokemon) {
-    let caughtPokemon = JSON.parse(localStorage.getItem('caughtPokemon')) || [];
-    if (!caughtPokemon.some(p => p.id === pokemon.id)) {
-        caughtPokemon.push({
-            id: pokemon.id,
-            name: pokemon.name,
-            sprite: pokemon.sprites.front_default
-        });
-        localStorage.setItem('caughtPokemon', JSON.stringify(caughtPokemon));
-        displayCaughtPokemon();
+    // Function to fetch quiz questions based on difficulty
+    async function fetchQuizQuestions(difficulty) {
+        const apiUrl = https://opentdb.com/api.php?amount=10&difficulty=${difficulty}&type=multiple;
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data.results;
     }
-}
 
-function loadCaughtPokemon() {
-    const caughtPokemon = JSON.parse(localStorage.getItem('caughtPokemon')) || [];
-    caughtPokemon.forEach(pokemon => {
-        displayCaughtPokemon(pokemon);
+    // Function to start quiz
+    function startQuiz() {
+        quizForm.classList.add('hidden');
+        questionContainer.classList.remove('hidden');
+        loadQuestion();
+    }
+
+    // Function to load question and answers
+    function loadQuestion() {
+        const question = quizData[currentQuestionIndex];
+        questionElement.innerText = question.question;
+        answersElement.innerHTML = '';
+        const allAnswers = [...question.incorrect_answers, question.correct_answer];
+        shuffleArray(allAnswers); // Shuffle answers to display randomly
+
+        allAnswers.forEach(answer => {
+            const answerButton = document.createElement('button');
+            answerButton.innerText = decodeHTML(answer); // Decode HTML entities
+            answerButton.classList.add('btn', 'btn-primary');
+            answerButton.addEventListener('click', () => checkAnswer(answer === question.correct_answer));
+            answersElement.appendChild(answerButton);
+        });
+    }
+
+    // Function to decode HTML entities
+    function decodeHTML(html) {
+        const txt = document.createElement('textarea');
+        txt.innerHTML = html;
+        return txt.value;
+    }
+
+    // Function to check if selected answer is correct
+    function checkAnswer(isCorrect) {
+        if (isCorrect) {
+            correctAnswers++;
+            resultMessage.textContent = 'Correct!';
+        } else {
+            incorrectAnswers++;
+            resultMessage.textContent = 'Incorrect!';
+        }
+        showResult();
+    }
+
+    // Function to display result and show next question or end quiz
+    function showResult() {
+        questionContainer.classList.add('hidden');
+        resultContainer.classList.remove('hidden');
+        updateScore();
+    }
+
+    // Function to update score display
+    function updateScore() {
+        resultMessage.textContent += ` Score: ${correctAnswers} correct, ${incorrectAnswers} incorrect.`;
+        localStorage.setItem('quizScore', JSON.stringify({ correct: correctAnswers, incorrect: incorrectAnswers }));
+    }
+
+    // Event listener for next question button
+    nextQuestionButton.addEventListener('click', () => {
+        resultContainer.classList.add('hidden');
+        questionContainer.classList.remove('hidden');
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+            loadQuestion();
+        } else {
+            endQuiz();
+        }
     });
-}
 
-function displayCaughtPokemon(pokemon) {
-    const pokemonCard = document.createElement('div');
-    pokemonCard.classList.add('col-md-3', 'pokemon-card', 'caught');
-    pokemonCard.innerHTML = `
-        <div class="card mb-4">
-            <img src="${pokemon.sprite}" class="card-img-top pokemon-img" alt="${pokemon.name}">
-            <div class="card-body">
-                <h5 class="card-title text-center">${capitalizeFirstLetter(pokemon.name)}</h5>
-                <button class="btn btn-danger btn-block" onclick="releasePokemon(${pokemon.id})">Release</button>
-            </div>
-        </div>
-    `;
-    caughtPokemonList.appendChild(pokemonCard);
-}
+    // Function to end the quiz
+    function endQuiz() {
+        resultMessage.textContent = Quiz ended. Final score: ${correctAnswers} correct, ${incorrectAnswers} incorrect.;
+        resultContainer.innerHTML += <button id="restart-quiz">Restart Quiz</button>;
+        const restartButton = document.getElementById('restart-quiz');
+        restartButton.addEventListener('click', () => {
+            restartQuiz();
+        });
+    }
 
-function releasePokemon(pokemonId) {
-    let caughtPokemon = JSON.parse(localStorage.getItem('caughtPokemon')) || [];
-    caughtPokemon = caughtPokemon.filter(p => p.id !== pokemonId);
-    localStorage.setItem('caughtPokemon', JSON.stringify(caughtPokemon));
-    caughtPokemonList.innerHTML = '';
-    loadCaughtPokemon();
-}
+    // Function to restart the quiz
+    function restartQuiz() {
+        currentQuestionIndex = 0;
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        resultContainer.classList.add('hidden');
+        quizForm.classList.remove('hidden');
+    }
+
+    // Event listener for reset score button
+    resetScoreButton.addEventListener('click', () => {
+        localStorage.removeItem('quizScore');
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        restartQuiz();
+    });
+
+    // Shuffle array function (Fisher-Yates shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Check for previous quiz score in local storage on page load
+    const quizScore = JSON.parse(localStorage.getItem('quizScore'));
+    if (quizScore) {
+        correctAnswers = quizScore.correct;
+        incorrectAnswers = quizScore.incorrect;
+        updateScore();
+        quizForm.classList.add('hidden');
+        endQuiz();
+    }
+});

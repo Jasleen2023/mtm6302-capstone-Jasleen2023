@@ -3,20 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Viewer</title>
+    <title>Quiz Game</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center my-4">Pokemon Viewer</h1>
-        <div id="pokemon-list" class="row"></div>
-        <div class="text-center my-4">
-            <button id="load-more" class="btn btn-primary">Load More</button>
+        <h1>Quiz Game</h1>
+        <div id="quiz-container">
+            <form id="quiz-form">
+                <label for="difficulty">Select Difficulty:</label>
+                <select id="difficulty" name="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                <button type="submit">Start Quiz</button>
+            </form>
+            <div id="question-container" class="hidden">
+                <h2 id="question"></h2>
+                <div id="answers"></div>
+            </div>
+            <div id="result" class="hidden">
+                <p id="result-message"></p>
+                <button id="next-question">Next Question</button>
+                <button id="reset-score">Reset Score</button>
+            </div>
         </div>
-        <h2 class="text-center my-4">Caught Pokemon</h2>
-        <div id="caught-pokemon-list" class="row"></div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

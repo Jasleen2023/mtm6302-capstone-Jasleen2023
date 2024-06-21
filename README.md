@@ -27,7 +27,9 @@ add Style.css
 Step5:output
 ![picture 1](https://github.com/Jasleen2023/mtm6302-capstone-Jasleen2023/assets/145064057/71e710d5-216a-45e5-9411-6b699f8dd4de)
 
+From part-2
+![part-2 screenshot capstone](https://github.com/Jasleen2023/mtm6302-capstone-Jasleen2023/assets/145064057/80d53f55-ccff-4d9a-9659-78a75448f97c)
 
-       
+
 
 

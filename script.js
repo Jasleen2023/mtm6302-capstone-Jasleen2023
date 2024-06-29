@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultMessage = document.getElementById('result-message');
     const nextQuestionButton = document.getElementById('next-question');
     const resetScoreButton = document.getElementById('reset-score');
+    const searchButton = document.querySelector('.search-bar button');
+    const searchInput = document.querySelector('.search-bar input');
 
     let quizData = [];
     let currentQuestionIndex = 0;
@@ -40,14 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to load question and answers
     function loadQuestion() {
         const question = quizData[currentQuestionIndex];
-        questionElement.innerText = question.question;
+        questionElement.innerHTML = decodeHTML(question.question);
         answersElement.innerHTML = '';
         const allAnswers = [...question.incorrect_answers, question.correct_answer];
         shuffleArray(allAnswers); // Shuffle answers to display randomly
 
         allAnswers.forEach(answer => {
             const answerButton = document.createElement('button');
-            answerButton.innerText = decodeHTML(answer); // Decode HTML entities
+            answerButton.innerHTML = decodeHTML(answer); // Decode HTML entities
             answerButton.classList.add('btn', 'btn-primary');
             answerButton.addEventListener('click', () => checkAnswer(answer === question.correct_answer));
             answersElement.appendChild(answerButton);
@@ -56,9 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to decode HTML entities
     function decodeHTML(html) {
-        const elem = document.createElement('div');
-        elem.innerHTML = html;
-        return elem.textContent || elem.innerText;
+        const txt = document.createElement('textarea');
+        txt.innerHTML = html;
+        return txt.value;
     }
 
     // Function to check if selected answer is correct
@@ -82,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to update score display
     function updateScore() {
-        resultMessage.textContent = `Score: ${correctAnswers} correct, ${incorrectAnswers} incorrect.`;
+        resultMessage.textContent += ` Score: ${correctAnswers} correct, ${incorrectAnswers} incorrect.`;
         localStorage.setItem('quizScore', JSON.stringify({ correct: correctAnswers, incorrect: incorrectAnswers }));
     }
 
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to end the quiz
     function endQuiz() {
         resultMessage.textContent = `Quiz ended. Final score: ${correctAnswers} correct, ${incorrectAnswers} incorrect.`;
-        resultContainer.innerHTML += '<button id="restart-quiz">Restart Quiz</button>';
+        resultContainer.innerHTML += `<button id="restart-quiz">Restart Quiz</button>`;
         const restartButton = document.getElementById('restart-quiz');
         restartButton.addEventListener('click', () => {
             restartQuiz();
@@ -143,4 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
         quizForm.classList.add('hidden');
         endQuiz();
     }
+
+    // Event listener for search functionality
+    searchButton.addEventListener('click', () => {
+        alert(`Searching for: ${searchInput.value}`);
+    });
 });

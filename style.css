@@ -1,17 +1,66 @@
-
 body {
     font-family: Arial, sans-serif;
-    background-color: #eebbdd;
+    background-color: #d267d1;
     margin: 0;
     padding: 0;
 }
 
+header {
+    background-color: #f511c8;
+    padding: 10px 20px;
+    color: white;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    font-size: 1.5em;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 5px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.search-bar button {
+    padding: 5px;
+    border: none;
+    background-color: white;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
 .container {
     max-width: 800px;
-    margin: 50px auto;
-    padding: 50px;
-    background-color: #68aaf5;
-    box-shadow: 0 0 10px rgba(236, 207, 207, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
@@ -24,30 +73,30 @@ h1 {
 }
 
 #quiz-form {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .hidden {
     display: none;
 }
 
-
+/* Quiz question styling */
 #question {
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 #answers {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 10px;
     align-items: center;
 }
 
 button[type="submit"],
 button {
     padding: 10px 20px;
-    background-color: #0e0d0d;
-    color: #f9fbfc;
+    background-color: #e621ed;
+    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -55,7 +104,7 @@ button {
 
 button[type="submit"]:hover,
 button:hover {
-    background-color: #3a90ec;
+    background-color: #c028ac;
 }
 
 #result-message {

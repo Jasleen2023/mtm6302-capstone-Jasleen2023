@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fcfcfb; /* Make text white for better visibility on dark background */
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    padding: 10px 20px;
+}
+h1{ 
+    color: #8521e2;
+}
+.logo-container {
+    margin-bottom: 10px;
+}
+
+.logo {
+    max-width: 100px;
+    height: auto;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+.nav-button, .project-button {
+    background-color: #007bff;
+    color: rgb(250, 133, 133);
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.nav-button:hover, .project-button:hover {
+    background-color: #a2e4ec;
+}
+
+footer {
+    text-align: center;
+    background: rgba(86, 3, 240, 0.7); /* Semi-transparent background */
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+main {
+    padding-top: 20px; /* Add some padding to avoid overlap with the fixed footer */
+}

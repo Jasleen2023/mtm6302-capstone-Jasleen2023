@@ -1,0 +1,21 @@
+body {
+    background-color: #f1e20a;
+}
+
+.pokemon-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.pokemon-card:hover {
+    transform: scale(1.05);
+}
+
+.pokemon-img {
+    width: 100%;
+    height: auto;
+}
+
+.caught {
+    border: 2px solid rgb(241, 161, 94);
+}

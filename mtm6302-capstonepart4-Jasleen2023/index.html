@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronomy Picture of the Day</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="download.jpeg" alt="Logo" class="logo"> 
+        </div>
+        <nav class="button-container">
+            <button class="nav-button" onclick="window.location.href='index.html'">Home</button>
+            <button class="nav-button" onclick="window.location.href='About Us.html'">About Us</button>
+            <button class="nav-button" onclick="window.location.href='Contact Us.html'">Contact Us</button>
+            
+            <button class="nav-button" onclick="window.location.href='Quiz/Quiz.html'">Project 1 - Quiz</button>
+            <button class="nav-button" onclick="window.location.href='Pokemon/Pokemon.html'">Project 2 - Pokedex</button>
+        </nav>
+    </header>
+<h1> Welcome to my projects</h1>
+    <main class="container my-4">
+        <h1>Project 1 - Quiz</h1>
+        <p>This is the Quiz project. It features an interactive quiz interface where users can test their knowledge on various topics. The project includes multiple-choice questions with instant feedback and scoring. The goal is to provide an engaging and educational experience for users who want to challenge their understanding of different subjects. Users can start the quiz, answer questions, and see their results immediately after completing the quiz.</p>
+        <p>The Quiz project is designed with a user-friendly interface and aims to make learning enjoyable. The questions are dynamically generated, ensuring that each quiz attempt offers a unique set of challenges. This project highlights the use of JavaScript for dynamic content and interaction, CSS for styling, and HTML for the basic structure of the quiz application.</p>
+    </main>
+
+    <main class="container my-4">
+        <h1>Project 2 - Pokedex</h1>
+        <p>Project 2 is a Pokedex application that allows users to explore a comprehensive list of Pokémon. This project provides detailed information about each Pokémon, including their types, abilities, and stats. Users can search for Pokémon by name or number, view their details, and browse through different categories of Pokémon. The Pokedex features a clean and intuitive interface, making it easy for users to find and learn about their favorite Pokémon.</p>
+        <p>The Pokedex project demonstrates the use of APIs to fetch data and display it dynamically on the web page. It utilizes modern JavaScript techniques to manage and manipulate data, along with responsive design principles to ensure that the application works well on various devices. This project is an excellent example of how web technologies can be used to create interactive and informative applications.</p>
+    </main>
+    
+        
+        
+        <form id="dateForm" class="form-inline justify-content-center mb-4">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="dateInput" class="sr-only">Date</label>
+                <input type="date" class="form-control" id="dateInput" required>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Get Picture</button>
+        </form>
+
+        <div id="pictureDisplay" class="text-center"></div>
+
+        <h2 class="text-center mt-5">Favourites</h2>
+        <div id="favouritesDisplay" class="row"></div>
+    </main>
+
+    <footer>Project made by Jasleen Kaur</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

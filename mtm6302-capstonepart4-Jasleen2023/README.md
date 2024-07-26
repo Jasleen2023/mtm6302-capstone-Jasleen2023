@@ -1,10 +1,15 @@
 Create new branch
 ![create new branch part-4](https://github.com/user-attachments/assets/a298b770-e0db-4dde-871d-3b890c36f7c9)
+
 Compare and pull request
 ![compare and pull part-4](https://github.com/user-attachments/assets/cca074c5-fd5e-415c-9488-5574a5aaaabc)
+
 Merged pull
 ![merge pull](https://github.com/user-attachments/assets/c0c8a027-44a9-4f8f-bc5d-cd25145595df)
+
 Uploading all files on github
+![files](https://github.com/user-attachments/assets/2a0cf5d2-7280-494c-b415-9a3996236ee2)
+
 
 Output
 Homepage

@@ -16,16 +16,20 @@ add readme file
 ![readme 1](https://github.com/Jasleen2023/mtm6302-capstone-Jasleen2023/assets/145064057/f39d2ce5-536f-4565-9a05-3fbaae12911a)
 
 add index.html
-![index 1](https://github.com/Jasleen2023/mtm6302-capstone-Jasleen2023/assets/145064057/cebc8813-4e1b-49fa-ad3d-0f46892402df)
+![index](https://github.com/user-attachments/assets/07d1f1bc-13f0-433c-8e49-8f6335d4c4cb)
+
 
 add Script.js
-![script 1](https://github.com/Jasleen2023/mtm6302-capstone-Jasleen2023/assets/145064057/7b688c7c-739c-4974-8c99-e02ac94c88d1)
+![js](https://github.com/user-attachments/assets/5a2fef0f-0b8e-4c76-835d-e54b4e2b0f28)
+
 
 add Style.css
-![style 1](https://github.com/Jasleen2023/mtm6302-capstone-Jasleen2023/assets/145064057/905a46f9-c39d-4004-a25a-aee82fe6f946)
+![style](https://github.com/user-attachments/assets/5ef03553-0cb8-4fd4-a615-3b8d7a6d4c82)
+
 
 Step5:output
-![picture 1](https://github.com/Jasleen2023/mtm6302-capstone-Jasleen2023/assets/145064057/71e710d5-216a-45e5-9411-6b699f8dd4de)
+![pokemon new](https://github.com/user-attachments/assets/3a898240-d1c0-4f0e-80b9-439bc3305914)
+
 
 
 
